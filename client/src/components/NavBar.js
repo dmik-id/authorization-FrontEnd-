@@ -26,19 +26,19 @@ const NavBar = observer(() => {
                             variant={"outline-light"}
                             onClick={() => history.push(ADMIN_ROUTE)}
                         >
-                            Админ панель
+                            Admin Panel
                         </Button>
                         <Button
                             variant={"outline-light"}
                             onClick={() => logOut()}
                             className="ml-2"
                         >
-                            Выйти
+                            Sign Out
                         </Button>
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{color: 'white'}}>
-                        <Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
+                        <Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Authorization</Button>
                     </Nav>
                 }
             </Container>
