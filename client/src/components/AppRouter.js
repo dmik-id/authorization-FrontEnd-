@@ -1,33 +1,26 @@
-import React, { useContext } from "react";
-import {Switch, Route, Redirect} from "react-router-dom"
-import Landing from "../page/Landing";
-import { authRoutes, publicRoutes } from "../routes";
-import { Context } from "../index";
+  
+import React, {useContext} from 'react';
+import {Switch, Route, Redirect} from 'react-router-dom'
+import {authRoutes, publicRoutes} from "../routes";
+import {LANDING_ROUTE} from "../utils/consts";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const AppRouter = () =>{
-  const {user} = useContext(Context)
+const AppRouter = observer(() => {
+    const {user} = useContext(Context)
 
-  console.log(user)
-  return(
-
-    <Switch>
-        {user.isAuth && authRoutes.map(({path, Component}) =>
-          <Route key={path} path={path} component={Component} exact/>
-        )}
-
-
-        {publicRoutes.map(({path, Component}) =>
-          <Route key={path} path={path} component={Component} exact/>
-        )}
-
-        <Redirect to={Landing}/>
-
-
-
-      </Switch>
-
-
-  )
-}
+    console.log(user)
+    return (
+        <Switch>
+            {user.isAuth && authRoutes.map(({path, Component}) =>
+                <Route key={path} path={path} component={Component} exact/>
+            )}
+            {publicRoutes.map(({path, Component}) =>
+                <Route key={path} path={path} component={Component} exact/>
+            )}
+            <Redirect to={LANDING_ROUTE}/>
+        </Switch>
+    );
+});
 
 export default AppRouter;
