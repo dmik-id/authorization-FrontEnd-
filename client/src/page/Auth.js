@@ -1,13 +1,16 @@
 import React, {useContext, useState} from 'react';
-import {Container, Form} from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { FormControl } from '@material-ui/core';
+import Card from '@material-ui/core/Card'
+import Container from '@material-ui/core/Container'
 import Row from "react-bootstrap/Row";
 import {NavLink, useLocation, useHistory} from "react-router-dom";
 import {LANDING_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {login, registration} from "../http/userAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
+import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
+import { makeStyles } from '@material-ui/core/styles';
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -16,7 +19,7 @@ const Auth = observer(() => {
     const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const classes = makeStyles()
     const click = async () => {
         try {
             let data;
@@ -33,22 +36,23 @@ const Auth = observer(() => {
         }
 
     }
+    
 
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
             style={{height: window.innerHeight - 54}}
         >
-            <Card style={{width: 600}} className="p-5">
+            <Card style={{width: 300}} className="p-5">
                 <h2 className="m-auto">{isLogin ? 'Authorization' : "Registration"}</h2>
-                <Form className="d-flex flex-column">
-                    <Form.Control
+                <FormControl >
+                    <Input
                         className="mt-3"
                         placeholder="email..."
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
-                    <Form.Control
+                    <Input
                         className="mt-3"
                         placeholder="пароль..."
                         value={password}
@@ -73,7 +77,7 @@ const Auth = observer(() => {
                         </Button>
                     </Row>
 
-                </Form>
+                </FormControl>
             </Card>
         </Container>
     );

@@ -1,13 +1,15 @@
 import React, {useContext} from 'react';
 import {Context} from "../index";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import Nav from "react-bootstrap/Nav";//////////
 import {NavLink} from "react-router-dom";
 import {ADMIN_ROUTE, LANDING_ROUTE, LOGIN_ROUTE} from "../utils/consts";
-import {Button} from "react-bootstrap";
+import { Container } from '@material-ui/core';
 import {observer} from "mobx-react-lite";
-import Container from "react-bootstrap/Container";
 import {useHistory} from 'react-router-dom'
+import Appbar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
+
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
@@ -17,11 +19,11 @@ const NavBar = observer(() => {
         user.setIsAuth(false)
     }
     return (
-        <Navbar bg="dark" variant="dark">
+        <Appbar bg="dark" variant="dark">
             <Container>
                 <NavLink style={{color:'white'}} to={LANDING_ROUTE}>landing</NavLink>
                 {user.isAuth ?
-                    <Nav className="ml-auto" style={{color: 'white'}}>
+                    <Link className="ml-auto" style={{color: 'white'}}>
                         <Button
                             variant={"outline-light"}
                             onClick={() => history.push(ADMIN_ROUTE)}
@@ -35,14 +37,14 @@ const NavBar = observer(() => {
                         >
                             Sign Out
                         </Button>
-                    </Nav>
+                    </Link>
                     :
-                    <Nav className="ml-auto" style={{color: 'white'}}>
-                        <Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Authorization</Button>
-                    </Nav>
+                  
+                        <Button  variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Authorization</Button>
+                  
                 }
             </Container>
-        </Navbar>
+        </Appbar>
 
     );
 });
